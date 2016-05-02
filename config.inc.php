@@ -48,10 +48,16 @@ for ($z = 0; $z < count($services_json); $z++)
 /**
  * phpMyAdmin configuration storage settings.
  */
+$appinfo = getenv("VCAP_APPLICATION");
+$appinfo_json = json_decode($appinfo,true);
+$current_url = $appinfo_json['uris'][0];
+
+$cfg['PmaAbsoluteUri'] = $current_url."/";
+$cfg['LoginCookieValidity'] = 1440;
 
 /* User used to manipulate with storage */
 // $cfg['Servers'][$i]['controlhost'] = '';
-// $cfg['Servers'][$i]['controlport'] = '';
+$cfg['Servers'][$i]['controlport'] = '80';
 // $cfg['Servers'][$i]['controluser'] = 'pma';
 // $cfg['Servers'][$i]['controlpass'] = 'pmapass';
 
